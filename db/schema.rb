@@ -10,10 +10,46 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_02_042117) do
+ActiveRecord::Schema.define(version: 2021_12_02_043919) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "habit_entries", force: :cascade do |t|
+    t.datetime "date"
+    t.integer "status"
+    t.bigint "user_id"
+    t.bigint "habit_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["habit_id"], name: "index_habit_entries_on_habit_id"
+    t.index ["user_id"], name: "index_habit_entries_on_user_id"
+  end
+
+  create_table "habits", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "journal_entries", force: :cascade do |t|
+    t.datetime "date"
+    t.string "content"
+    t.bigint "user_id"
+    t.bigint "journal_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["journal_id"], name: "index_journal_entries_on_journal_id"
+    t.index ["user_id"], name: "index_journal_entries_on_user_id"
+  end
+
+  create_table "journals", force: :cascade do |t|
+    t.string "name"
+    t.string "details"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "moods", force: :cascade do |t|
     t.integer "mood"
@@ -31,5 +67,9 @@ ActiveRecord::Schema.define(version: 2021_12_02_042117) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "habit_entries", "habits"
+  add_foreign_key "habit_entries", "users"
+  add_foreign_key "journal_entries", "journals"
+  add_foreign_key "journal_entries", "users"
   add_foreign_key "moods", "users"
 end
