@@ -1,10 +1,9 @@
 module Queries
   class FetchUser < Queries::BaseQuery
     type Types::UserType, null: false
-    argument :id, ID, required: true
 
-    def resolve(id:)
-      User.find(id)
+    def resolve
+      User.find(1)
     rescue ActiveRecord::RecordNotFound => _e
       GraphQL::ExecutionError.new('User does not exist')
     rescue ActiveRecord::InvalidRecord => e
