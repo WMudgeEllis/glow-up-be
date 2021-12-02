@@ -51,6 +51,15 @@ ActiveRecord::Schema.define(version: 2021_12_02_043919) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "moods", force: :cascade do |t|
+    t.integer "mood"
+    t.string "description"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_moods_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
@@ -62,4 +71,5 @@ ActiveRecord::Schema.define(version: 2021_12_02_043919) do
   add_foreign_key "habit_entries", "users"
   add_foreign_key "journal_entries", "journals"
   add_foreign_key "journal_entries", "users"
+  add_foreign_key "moods", "users"
 end
