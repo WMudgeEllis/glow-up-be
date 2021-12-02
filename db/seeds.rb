@@ -1,5 +1,13 @@
-User.destroy_all
+user = User.create!(
+  username: 'User',
+  password: 'hello',
+  password_confirmation: 'hello'
+)
 
-(0..10).to_a.each do |i|
-  User.create!(username: "user #{i}", password: 'hi', password_confirmation: 'hi')
+(1..10).to_a.each do |num|
+  Mood.create!(
+    mood: [1, 2, 3, 4, 5].sample,
+    description: "Mood #{num}",
+    user_id: user.id
+  )
 end

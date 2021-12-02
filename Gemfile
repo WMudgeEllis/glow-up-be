@@ -28,6 +28,10 @@ gem 'graphql'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
 
+group :test do
+  gem 'database_cleaner-active_record'
+end
+
 group :development, :test do
   gem 'factory_bot_rails'
   gem 'faker'
