@@ -3,7 +3,7 @@ module Queries
     type Types::UserType, null: false
 
     def resolve
-      User.find(1)
+      User.first
     rescue ActiveRecord::RecordNotFound => _e
       GraphQL::ExecutionError.new('User does not exist')
     rescue ActiveRecord::InvalidRecord => e
