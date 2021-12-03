@@ -11,6 +11,7 @@ module Types
 
     def weekly_moods
       object.moods.order(created_at: :desc).limit(7)
+    end
 
     def habits
       object.habits.distinct
