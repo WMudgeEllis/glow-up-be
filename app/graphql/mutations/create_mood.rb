@@ -7,7 +7,7 @@ module Mutations
     def resolve(params:)
       mood_params = Hash params
       begin
-        user = User.find(1)
+        user = User.first
         user.moods.create!(mood_params)
 
         { user: user }
