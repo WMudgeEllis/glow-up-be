@@ -13,12 +13,12 @@ module Types
       object.moods.order(created_at: :desc).limit(7)
     end
 
-    def habits
-      object.habits.distinct
-    end
-
     def journals
       object.journals.distinct
+    end
+
+    def habits
+      object.habits.distinct
     end
   end
 end
