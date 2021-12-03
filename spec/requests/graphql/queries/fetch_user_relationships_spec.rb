@@ -6,12 +6,12 @@ describe 'Fetch User Query Relationships' do
   let(:data) { reduced[:fetchUser] }
 
   let!(:user) do
-    FactoryBot.create(:user) do |user|
-      FactoryBot.create(:journal) do |journal|
-        FactoryBot.create_list :journal_entry, 5, journal_id: journal.id, user_id: user.id
+    create(:user) do |user|
+      create(:journal) do |journal|
+        create_list :journal_entry, 5, journal_id: journal.id, user_id: user.id
       end
-      FactoryBot.create(:habit) do |habit|
-        FactoryBot.create_list :habit_entry, 5, user_id: user.id, habit_id: habit.id
+      create(:habit) do |habit|
+        create_list :habit_entry, 5, user_id: user.id, habit_id: habit.id
       end
     end
   end
