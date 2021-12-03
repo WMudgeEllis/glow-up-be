@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :journal do
-    name { "MyString" }
-    details { "MyString" }
+    name { Faker::Movies::StarWars.character }
+    details { Faker::Lorem.sentence }
   end
 end
