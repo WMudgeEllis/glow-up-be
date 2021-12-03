@@ -1,7 +1,7 @@
 require "rails_helper"
 
 
-RSpec.describe 'get all habits with last seven habit entries' do
+RSpec.describe 'get weekly habit entries' do
 
   before :each do
     @user = create(:user)
@@ -28,13 +28,12 @@ RSpec.describe 'get all habits with last seven habit entries' do
 
     result = GlowUpSchema.execute(query).as_json
 
-    expect(result["data"]["habits"].first).to have_key("status")
-    expect(result["data"]["habits"].first).to have_key("habitEntries")
-    expect(result["data"]["habits"].first["habitEntries"]).to be_a(Array)
-    expect(result["data"]["habits"].first["habitEntries"]).to be_a(Array)
-    expect(result["data"]["habits"].first["habitEntries"].length).to eq(7)
-    expect(result["data"]["habits"].first["habitEntries"].length.first).to have_key("date")
-    expect(result["data"]["habits"].first["habitEntries"].length.first).to have_key("status")
+    expect(result["data"]["fetchUser"]["habits"].first).to have_key("weeklyHabitEntries")
+    expect(result["data"]["fetchUser"]["habits"].first["weeklyHabitEntries"]).to be_a(Array)
+    expect(result["data"]["fetchUser"]["habits"].first["weeklyHabitEntries"]).to be_a(Array)
+    expect(result["data"]["fetchUser"]["habits"].first["weeklyHabitEntries"].length).to eq(7)
+    expect(result["data"]["fetchUser"]["habits"].first["weeklyHabitEntries"].first).to have_key("date")
+    expect(result["data"]["fetchUser"]["habits"].first["weeklyHabitEntries"].first).to have_key("status")
 
   end
 
@@ -48,7 +47,7 @@ RSpec.describe 'get all habits with last seven habit entries' do
           description
           weeklyHabitEntries {
             status
-            createdAt
+            date
           }
     		}
       }
