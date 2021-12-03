@@ -13,6 +13,11 @@ module Types
       object.moods.order(created_at: :desc).limit(7)
     end
 
+    def monthly_moods
+      object.moods.order(created_at: :desc)
+      .where(created_at: Time.now.beginning_of_month..Time.now.end_of_month)
+    end
+
     def journals
       object.journals.distinct
     end
