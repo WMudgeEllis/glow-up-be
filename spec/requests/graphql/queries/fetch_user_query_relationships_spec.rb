@@ -1,38 +1,9 @@
 require 'rails_helper'
 
-describe 'Fetch User Query' do
-  let(:query) do
-    <<~GQL
-      query fetchUser {
-        fetchUser {
-          id
-          username
-          journals {
-            id
-            name
-            details
-          }
-          journalEntries {
-            id
-            createdAt
-            content
-          }
-          habits {
-            id
-            name
-            description
-          }
-          habitEntries {
-            id
-            status
-          }
-        }
-      }
-    GQL
-  end
+describe 'Fetch User Query Relationships' do
   let(:json) { JSON.parse(response.body, symbolize_names: true) }
   let(:reduced) { json[:data] }
-  let(:data) { reduced[:fetchUser]}
+  let(:data) { reduced[:fetchUser] }
 
   let!(:user) do
     FactoryBot.create(:user) do |user|
@@ -93,5 +64,35 @@ describe 'Fetch User Query' do
       expect(entry[:id]).to_not be_empty
       expect(entry[:status]).to be_an Integer
     end
+  end
+
+  def query
+    <<~GQL
+      query fetchUser {
+        fetchUser {
+          id
+          username
+          journals {
+            id
+            name
+            details
+          }
+          journalEntries {
+            id
+            createdAt
+            content
+          }
+          habits {
+            id
+            name
+            description
+          }
+          habitEntries {
+            id
+            status
+          }
+        }
+      }
+    GQL
   end
 end
