@@ -7,5 +7,10 @@ module Types
     field :journals, [Types::JournalType]
     field :habit_entries, [Types::HabitEntryType]
     field :habits, [Types::HabitType]
+    field :weekly_moods, [Types::MoodType], null: true
+
+    def weekly_moods
+      object.moods.order(created_at: :desc).limit(7)
+    end
   end
 end
