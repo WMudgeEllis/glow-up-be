@@ -27,7 +27,7 @@ RSpec.describe 'get weekly habit entries' do
 
     result = GlowUpSchema.execute(query).as_json
     habit = result["data"]["fetchUser"]["habits"].first
-    
+
     expect(habit).to have_key("weeklyHabitEntries")
     expect(habit["weeklyHabitEntries"]).to be_a(Array)
     expect(habit["weeklyHabitEntries"]).to be_a(Array)
