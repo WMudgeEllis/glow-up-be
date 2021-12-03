@@ -4,6 +4,5 @@ module Types
     field :name, String, null: true
     field :details, String, null: true
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
-    field :journal_entries, [Types::JournalEntryType], null: true
   end
 end
