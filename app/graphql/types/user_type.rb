@@ -18,7 +18,8 @@ module Types
     end
 
     def habits
-      object.habits.distinct
+      #will need to be changed if we want user createable habits
+      Habit.all
     end
   end
 end
