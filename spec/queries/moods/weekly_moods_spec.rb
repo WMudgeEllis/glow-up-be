@@ -7,7 +7,13 @@ RSpec.describe 'get weekly moods' do
   end
 
   it 'can get past seven moods' do
-    10.times do
+    7.times do
+      create(:mood, user_id: @user.id)
+    end
+
+    sleep(1)
+
+    3.times do
       create(:mood, user_id: @user.id)
     end
 
@@ -15,10 +21,10 @@ RSpec.describe 'get weekly moods' do
 
     expect(result).to_not have_key("errors")
     expect(result).to have_key("data")
-    expect(result["data"]).to have_key("moods")
-    expect(result["data"]["moods"]).to be_a(Array)
-    expect(result["data"]["moods"].length).to eq(7)
-    expect(result["data"]["moods"].first["createdAt"]).to be < result["data"]["moods"].last["createdAt"]
+    expect(result["data"]["fetchUser"]).to have_key("weeklyMoods")
+    expect(result["data"]["fetchUser"]["weeklyMoods"]).to be_a(Array)
+    expect(result["data"]["fetchUser"]["weeklyMoods"].length).to eq(7)
+    expect(result["data"]["fetchUser"]["weeklyMoods"].first["createdAt"] > result["data"]["fetchUser"]["weeklyMoods"].last["createdAt"]).to eq(true)
   end
 
 
