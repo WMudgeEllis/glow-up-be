@@ -19,7 +19,6 @@ module Types
     end
 
     def habits
-      #will need to be changed if we want user createable habits
       Habit.all
     end
 
