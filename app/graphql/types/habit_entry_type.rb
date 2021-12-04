@@ -11,6 +11,5 @@ module Types
     def date
       object.created_at
     end
-    
   end
 end
