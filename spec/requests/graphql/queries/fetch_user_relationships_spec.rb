@@ -62,7 +62,12 @@ describe 'Fetch User Query Relationships' do
     data[:habitEntries].each do |entry|
       expect(entry[:id]).to_not be_empty
       expect(entry[:status]).to be_an Integer
+      expect(entry[:date]).to be_a String
     end
+  end
+
+  it 'returns weekly habits' do
+    expect(data[:weeklyHabits].size).to eq 5
   end
 
   def query
@@ -88,6 +93,10 @@ describe 'Fetch User Query Relationships' do
           habitEntries {
             id
             status
+            date
+          }
+          weeklyHabits {
+            id
           }
         }
       }
