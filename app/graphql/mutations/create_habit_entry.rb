@@ -8,8 +8,9 @@ module Mutations
       begin
         user = User.first
         habits.each do |habit|
-          HabitEntry.create!(user_id: user.id, habit_id: habit[:id], status: 1)
+          user.habit_entries.create!(habit_id: habit[:id], status: 1)
         end
+        HabitEntry.create_neglected(user, habits)
 
         { user: user }
 
