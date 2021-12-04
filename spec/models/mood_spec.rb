@@ -1,8 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Mood, type: :model do
-  it { should belong_to :user }
-  it { should validate_presence_of :mood }
+  describe 'validations and relationships' do
+    it { should belong_to :user }
+    it { should validate_presence_of :mood }
+  end
 
   describe 'scopes' do
     let!(:user) { create :user }
