@@ -18,7 +18,7 @@ module Types
       object
         .moods
         .order(created_at: :desc)
-        .where(created_at: Time.zone.now.beginning_of_month..Time.zone.now.end_of_month)
+        .where(created_at: Date.today.at_beginning_of_month..Date.today.at_end_of_month)
     end
 
     def journals
