@@ -8,9 +8,17 @@ module Types
     field :habit_entries, [Types::HabitEntryType]
     field :habits, [Types::HabitType]
     field :weekly_moods, [Types::MoodType], null: true
+    field :monthly_moods, [Types::MoodType], null: true
 
     def weekly_moods
       object.moods.order(created_at: :desc).limit(7)
+    end
+
+    def monthly_moods
+      object
+        .moods
+        .order(created_at: :desc)
+        .where(created_at: Date.today.at_beginning_of_month..Date.today.at_end_of_month)
     end
 
     def journals
