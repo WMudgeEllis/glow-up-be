@@ -1,8 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe HabitEntry, type: :model do
-  it { should belong_to :user }
-  it { should belong_to :habit }
+  describe 'relationships' do
+    it { should belong_to :user }
+    it { should belong_to :habit }
+  end
 
   before :each do
     @user = create(:user)
