@@ -8,4 +8,15 @@ class User < ApplicationRecord
   has_many :habits, through: :habit_entries
 
   validates :username, presence: true, uniqueness: true
+
+  def weekly_habits
+    habit_entries
+      .where('habit_entries.created_at > ?', Date.today - 7)
+      .group('habit_entries.created_at, habit_entries.id')
+      .order('habit_entries.created_at DESC')
+  end
+
+  def weekly_moods
+    moods.weekly_moods
+  end
 end
