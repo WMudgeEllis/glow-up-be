@@ -4,5 +4,6 @@ module Types
     include GraphQL::Types::Relay::HasNodesField
 
     field :fetch_user, resolver: Queries::FetchUser
+    field :fetch_habit, resolver: Queries::FetchHabits
   end
 end
