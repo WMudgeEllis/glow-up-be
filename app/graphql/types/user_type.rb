@@ -11,7 +11,7 @@ module Types
     field :weekly_moods, [Types::MoodType], null: true
 
     def weekly_moods
-      object.moods.order(created_at: :desc).limit(7)
+      object.weekly_moods
     end
 
     def journals
@@ -23,11 +23,7 @@ module Types
     end
 
     def weekly_habits
-      object
-        .habit_entries
-        .where('habit_entries.created_at > ?', Date.today - 7)
-        .group('habit_entries.created_at, habit_entries.id')
-        .order('habit_entries.created_at DESC')
+      object.weekly_habits
     end
   end
 end
