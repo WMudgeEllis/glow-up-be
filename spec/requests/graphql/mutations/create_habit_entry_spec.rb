@@ -9,10 +9,10 @@ RSpec.describe 'create habit entry' do
   end
 
   it 'can create a habit entry' do
-    post 'graphql', params: { query: query }
+    post '/graphql', params: { query: query }
 
     parsed = JSON.parse(response.body, symbolyze_names: true)
-
+    
     expect(@user.habit_entries.count).to eq(2)
     expect(@user.habit_entries.first.status).to eq(1)
   end
@@ -22,9 +22,7 @@ RSpec.describe 'create habit entry' do
     mutation {
       createHabitEntry(
         input: {
-          params: {
-            habit_ids: [1, 2]
-          }
+          params: [{id: 1}, {id: 2}]
         }
       ) {
         user {
