@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe HabitEntry, type: :model do
+  it { should belong_to :user }
+  it { should belong_to :habit }
+
   before :each do
     @user = create(:user)
     @habit = create(:habit)
