@@ -5,7 +5,7 @@ describe 'Fetch User Query Monthly Moods' do
   let(:reduced) { json[:data] }
   let(:data) { reduced[:fetchUser] }
   let!(:user) { create :user }
-  
+
   before :each do
     allow(Date).to receive(:today).and_return Date.new(2021,3,28)
     (0..40).to_a.each do |num|
