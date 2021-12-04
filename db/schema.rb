@@ -10,13 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_02_043919) do
+ActiveRecord::Schema.define(version: 2021_12_03_013525) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "habit_entries", force: :cascade do |t|
-    t.datetime "date"
     t.integer "status"
     t.bigint "user_id"
     t.bigint "habit_id"
