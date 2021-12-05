@@ -18,7 +18,6 @@ describe 'Fetch Habits Query' do
     habits.each_with_index do |habit, i|
       expect(data[i][:id]).to eq habit.id.to_s
       expect(data[i][:name]).to eq habit.name
-      expect(data[i][:description]).to eq habit.description
     end
   end
 
@@ -34,7 +33,6 @@ describe 'Fetch Habits Query' do
         fetchHabits {
           id
           name
-          description
           habitEntries {
             id
           }
