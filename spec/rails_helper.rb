@@ -32,7 +32,11 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 
-SimpleCov.start
+SimpleCov.start do
+  add_filter %r{graphql_controller}
+  add_filter %r{glow_up_schema}
+end
+
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
