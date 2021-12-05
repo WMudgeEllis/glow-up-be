@@ -53,7 +53,6 @@ describe 'Fetch User Query Relationships' do
     data[:habits].each do |habit|
       expect(habit[:id]).to_not be_empty
       expect(habit[:name]).to_not be_empty
-      expect(habit[:description]).to_not be_empty
     end
   end
 
@@ -85,7 +84,6 @@ describe 'Fetch User Query Relationships' do
           habits {
             id
             name
-            description
           }
           habitEntries {
             id
