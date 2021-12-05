@@ -17,6 +17,14 @@ describe 'Create Mood Mutation' do
     expect(JSON.parse(response.body)).to have_key 'errors'
   end
 
+  it 'return error with ActiveRecord' do
+    expect { post '/graphql', params: { query: bad_query } }
+      .to change(Mood, :count)
+      .by 0
+      
+    expect(JSON.parse(response.body)).to have_key 'errors'
+  end
+
   def query
     <<-GQL
       mutation {
@@ -43,6 +51,24 @@ describe 'Create Mood Mutation' do
           input: {
             params: {
               description: "hello"
+            }
+          }
+        ) {
+          user {
+            id
+          }
+        }
+      }
+    GQL
+  end
+
+  def bad_query
+    <<-GQL
+      mutation {
+        createMood(
+          input: {
+            params: {
+              description: ""
             }
           }
         ) {
