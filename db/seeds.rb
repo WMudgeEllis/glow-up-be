@@ -30,16 +30,21 @@ j = Journal.create!(name: 'daily', details: 'J')
   )
 end
 
-h1 = Habit.create!(name: 'h1', description: 'd1')
-h2 = Habit.create!(name: 'h2', description: 'd2')
-h3 = Habit.create!(name: 'h3', description: 'd3')
-h4 = Habit.create!(name: 'h4', description: 'd4')
-h5 = Habit.create!(name: 'h5', description: 'd5')
-h6 = Habit.create!(name: 'h6', description: 'd6')
-h7 = Habit.create!(name: 'h7', description: 'd7')
-h8 = Habit.create!(name: 'h8', description: 'd8')
-h9 = Habit.create!(name: 'h9', description: 'd9')
-h10 = Habit.create!(name: 'h10', description: 'd10')
+h1 = Habit.create!(name: 'Exercise', description: 'd1')
+h2 = Habit.create!(name: 'Meditate', description: 'd2')
+h3 = Habit.create!(name: 'Floss', description: 'd3')
+h4 = Habit.create!(name: 'Brush teeth x2', description: 'd4')
+h5 = Habit.create!(name: 'Drink Water', description: 'd5')
+h6 = Habit.create!(name: 'Socialize', description: 'd6')
+h7 = Habit.create!(name: 'Eat Healthy', description: 'd7')
+h8 = Habit.create!(name: 'Wash Dishes', description: 'd8')
+h9 = Habit.create!(name: 'Write in Journal', description: 'd9')
+h10 = Habit.create!(name: 'Take a Shower', description: 'd10')
+h11 = Habit.create!(name: 'Stay of Social Media', description: 'd10')
+h12 = Habit.create!(name: 'Make Bed', description: 'd10')
+h13 = Habit.create!(name: 'Read', description: 'd10')
+h14 = Habit.create!(name: 'Go Outside', description: 'd10')
+h15 = Habit.create!(name: 'Plan Tomorrow', description: 'd10')
 
 
 
@@ -126,6 +131,51 @@ end
 
 (1..10).to_a.each do |num|
   h10.habit_entries.create!(
+    created_at: Date.today - num,
+    status: [0, 1].sample,
+    user_id: User.first.id,
+    habit_id: h10.id
+  )
+end
+
+(1..10).to_a.each do |num|
+  h11.habit_entries.create!(
+    created_at: Date.today - num,
+    status: [0, 1].sample,
+    user_id: User.first.id,
+    habit_id: h10.id
+  )
+end
+
+(1..10).to_a.each do |num|
+  h12.habit_entries.create!(
+    created_at: Date.today - num,
+    status: [0, 1].sample,
+    user_id: User.first.id,
+    habit_id: h10.id
+  )
+end
+
+(1..10).to_a.each do |num|
+  h13.habit_entries.create!(
+    created_at: Date.today - num,
+    status: [0, 1].sample,
+    user_id: User.first.id,
+    habit_id: h10.id
+  )
+end
+
+(1..10).to_a.each do |num|
+  h14.habit_entries.create!(
+    created_at: Date.today - num,
+    status: [0, 1].sample,
+    user_id: User.first.id,
+    habit_id: h10.id
+  )
+end
+
+(1..10).to_a.each do |num|
+  h15.habit_entries.create!(
     created_at: Date.today - num,
     status: [0, 1].sample,
     user_id: User.first.id,
