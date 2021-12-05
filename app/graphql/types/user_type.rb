@@ -17,11 +17,12 @@ module Types
       object.weekly_moods
     end
 
-    def monthly_moods
+    def monthly_moods(month:)
       object
         .moods
         .order(created_at: :desc)
-        .where(created_at: Date.today.at_beginning_of_month..Date.today.at_end_of_month)
+        # .where(created_at: Date.today.at_beginning_of_month..Date.today.at_end_of_month)
+        .where('extract(month from created_at) = ?', month)
     end
 
     def journals
@@ -34,6 +35,8 @@ module Types
 
     def weekly_habits
       object.weekly_habits
+    def journal_entries
+      JournalEntries.all
     end
 
     def daily_mood
