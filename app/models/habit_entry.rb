@@ -14,7 +14,7 @@ class HabitEntry < ApplicationRecord
   end
 
   def self.destroy_today_entries(user)
-    where('created_at > ?', Date.today)
+    current_day
       .where(user_id: user.id)
       .destroy_all
   end
@@ -25,6 +25,7 @@ class HabitEntry < ApplicationRecord
       user.habit_entries.create!(habit_id: habit.id, status: 0)
     end
   end
+
   scope :completed, -> {
     where(status: 1)
   }
