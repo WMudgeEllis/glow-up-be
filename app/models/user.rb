@@ -19,4 +19,12 @@ class User < ApplicationRecord
   def weekly_moods
     moods.weekly_moods
   end
+
+  def daily_habits
+    habit_entries.daily_completed
+  end
+
+  def current_mood
+    moods.current_day_mood
+  end
 end
