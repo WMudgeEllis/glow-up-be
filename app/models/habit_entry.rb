@@ -17,5 +17,6 @@ class HabitEntry < ApplicationRecord
   scope :daily_completed, -> {
     completed
       .where('extract(day from created_at) = ?', Date.today.day)
+      .pluck(:habit_id)
   }
 end

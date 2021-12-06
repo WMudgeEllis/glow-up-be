@@ -35,7 +35,7 @@ RSpec.describe HabitEntry, type: :model do
     end
 
     it 'has all completed today' do
-      expect(user.habit_entries.daily_completed).to eq(completed_today)
+      expect(user.habit_entries.daily_completed).to eq(completed_today.map(&:habit_id))
     end
   end
 end

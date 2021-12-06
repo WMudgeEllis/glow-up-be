@@ -37,7 +37,7 @@ RSpec.describe User, type: :model do
     end
 
     it 'has habits completed for the day' do
-      expect(user.daily_habits).to eq(completed_habit_entries)
+      expect(user.daily_habits).to eq(completed_habit_entries.map(&:habit_id))
     end
 
     it 'has mood of the day' do
