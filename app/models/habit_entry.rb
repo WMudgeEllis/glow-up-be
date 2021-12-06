@@ -17,14 +17,7 @@ class HabitEntry < ApplicationRecord
       user.habit_entries.create!(habit_id: habit_ids, status: 1)
     end
 
-    #gets array of habit ids where there are no entries for today
-    neglected = Habit.select('habits.id')
-      .left_joins(:habit_entries)
-      .where(habit_entries: {user_id: user.id})
-      .where('habit_entries.created_at > ?', Date.today)
-      .distinct.pluck('habits.id')
-
-    create_neglected(user, neglected)
+    create_neglected(user, habit_ids)
   end
 
   def self.destroy_today_entries(user)
