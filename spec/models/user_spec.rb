@@ -41,7 +41,7 @@ RSpec.describe User, type: :model do
     end
 
     it 'has mood of the day' do
-      expect(user.current_mood).to eq(current_day_mood)
+      expect(user.daily_mood).to eq(current_day_mood)
     end
   end
 end

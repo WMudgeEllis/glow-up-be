@@ -24,7 +24,7 @@ class User < ApplicationRecord
     habit_entries.daily_completed
   end
 
-  def current_mood
+  def daily_mood
     moods.current_day_mood
   end
 end
