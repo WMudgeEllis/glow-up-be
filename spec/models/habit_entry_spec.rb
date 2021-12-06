@@ -20,7 +20,7 @@ RSpec.describe HabitEntry, type: :model do
       expect(@user.habit_entries.count).to eq(15)
       expect(HabitEntry.last.status).to eq(0)
     end
-    
+
     it 'does not duplicate neglected habits' do
       create(:habit_entry, user_id: @user.id, habit_id: @habit.id, status: 0)
 
@@ -53,6 +53,15 @@ RSpec.describe HabitEntry, type: :model do
 
       expect(@user.habit_entries.count).to eq(16)
     end
+
+    it 'can destroy all entries for today' do
+      create(:habit_entry, user_id: @user.id, habit_id: @habit.id, created_at: Date.today - 1)
+      create_list(:habit_entry, 3, user_id: @user.id, habit_id: @habit.id)
+
+      HabitEntry.destroy_today_entries(@user)
+
+      expect(@user.habit_entries.count).to eq(1)
+    end
   end
 
   describe 'daily completed' do
@@ -71,5 +80,4 @@ RSpec.describe HabitEntry, type: :model do
       expect(user.habit_entries.daily_completed).to eq(completed_today.map(&:habit_id))
     end
   end
-
 end
