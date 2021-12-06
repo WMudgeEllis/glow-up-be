@@ -4,7 +4,7 @@ describe 'create habit entry' do
 
   before :each do
     @user = create(:user)
-    @habit = create(:habit)
+    @habit = create(:habit, id: 1)
     create(:habit, id: 7)
     create(:habit, id: 13)
   end
@@ -23,6 +23,16 @@ describe 'create habit entry' do
     parsed = JSON.parse(response.body, symbolize_names: true)
 
     expect(parsed).to have_key(:errors)
+  end
+
+  it 'can update habit entries' do
+    post '/graphql', params: { query: query }
+
+    post '/graphql', params: { query: update_query }
+
+    expect(@user.habit_entries.count).to eq(Habit.all.count)
+    expect(@user.habit_entries[1].status).to eq(1)
+    expect(@habit.habit_entries.first.status).to eq(1)
   end
 
   def query
@@ -47,6 +57,22 @@ describe 'create habit entry' do
       createHabitEntry(
         input: {
           haha_evil_query
+        }
+      ) {
+        user {
+          id
+        }
+      }
+    }
+    GQL
+  end
+
+  def update_query
+    <<~GQL
+    mutation {
+      createHabitEntry(
+        input: {
+          params: [{id: 1}]
         }
       ) {
         user {
