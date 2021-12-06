@@ -13,14 +13,25 @@ describe 'Fetch User Query Monthly Moods' do
       mood.update_attribute(:created_at, Date.today - num)
     end
 
-    post '/graphql', params: { query: query }
   end
 
   it 'returns moods for current month' do
+    post '/graphql', params: { query: query }
+
     result = data[:monthlyMoods].first[:createdAt] > data[:monthlyMoods].last[:createdAt]
 
     expect(json).to_not have_key(:errors)
     expect(data[:monthlyMoods].length).to eq(28)
+    expect(result).to be(true)
+  end
+
+  it 'returns moods for specified month' do
+    post '/graphql', params: { query: february }
+
+    result = data[:monthlyMoods].first[:createdAt] > data[:monthlyMoods].last[:createdAt]
+
+    expect(json).to_not have_key(:errors)
+    expect(data[:monthlyMoods].length).to eq(13)
     expect(result).to be(true)
   end
 
@@ -30,6 +41,22 @@ describe 'Fetch User Query Monthly Moods' do
         fetchUser {
           id
           monthlyMoods {
+            createdAt
+            description
+            id
+            mood
+          }
+        }
+      }
+    GQL
+  end
+
+  def february
+    <<~GQL
+      query fetchUser {
+        fetchUser {
+          id
+          monthlyMoods(month: 2) {
             createdAt
             description
             id
