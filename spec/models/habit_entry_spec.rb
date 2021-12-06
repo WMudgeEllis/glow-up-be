@@ -15,7 +15,7 @@ RSpec.describe HabitEntry, type: :model do
     end
 
     it 'creates habit entries for neglected habits' do
-      HabitEntry.create_neglected(@user, [{id: @habit.id}])
+      HabitEntry.create_neglected(@user, [@habit.id])
 
       expect(@user.habit_entries.count).to eq(15)
       expect(HabitEntry.last.status).to eq(0)
@@ -24,13 +24,13 @@ RSpec.describe HabitEntry, type: :model do
     it 'does not duplicate neglected habits' do
       create(:habit_entry, user_id: @user.id, habit_id: @habit.id, status: 0)
 
-      HabitEntry.create_neglected(@user, [])
+      HabitEntry.create_entries(@user, [])
 
       expect(@user.habit_entries.count).to eq(15)
     end
 
     it 'creates habit entries for completed habits' do
-      HabitEntry.create_entries(@user, [{id: @habit.id}, {id: 2}])
+      HabitEntry.create_entries(@user, [{id: @habit.id}])
 
       expect(@user.habit_entries.count).to eq(15)
       expect(@habit.habit_entries.first.status).to eq(1)
