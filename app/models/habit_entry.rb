@@ -9,4 +9,13 @@ class HabitEntry < ApplicationRecord
       user.habit_entries.create!(habit_id: habit.id, status: 0)
     end
   end
+
+  scope :completed, -> {
+    where(status: 1)
+  }
+
+  scope :daily_completed, -> {
+    completed
+      .where('extract(day from created_at) = ?', Date.today.day)
+  }
 end
