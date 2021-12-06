@@ -14,5 +14,4 @@ class Mood < ApplicationRecord
     order(created_at: :desc)
     .where('extract(month from created_at) = ?', month)
   }
-
 end
