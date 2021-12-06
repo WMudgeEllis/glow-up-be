@@ -8,11 +8,18 @@ RSpec.describe Mood, type: :model do
 
   describe 'scopes' do
     let!(:user) { create :user }
-    let!(:moods) { create_list :mood, 7, user_id: user.id }
+    let!(:mood_of_day) { create :mood, user_id: user.id }
+    let!(:moods) { create_list :mood, 6, user_id: user.id, created_at: Date.today - 1 }
     let!(:past_moods) { create_list :mood, 5, created_at: Date.today - 8, user_id: user.id }
 
     it 'returns moods for the week' do
-      expect(user.moods.weekly_moods).to eq(moods.reverse)
+      result = user.moods.weekly_moods
+
+      expect(result).to eq(moods.unshift(mood_of_day))
+    end
+
+    it 'returns mood for the day' do
+      expect(user.moods.current_day_mood).to eq(mood_of_day)
     end
   end
 end

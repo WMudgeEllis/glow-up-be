@@ -10,6 +10,8 @@ module Types
     field :weekly_habits, [Types::HabitEntryType]
     field :weekly_moods, [Types::MoodType], null: true
     field :monthly_moods, [Types::MoodType], null: true
+    field :daily_mood, Types::MoodType, null: true
+    field :daily_habits, [Types::HabitType], null: true
 
     def weekly_moods
       object.weekly_moods
@@ -32,6 +34,14 @@ module Types
 
     def weekly_habits
       object.weekly_habits
+    end
+
+    def daily_mood
+      object.daily_mood
+    end
+
+    def daily_habits
+      Habit.find(object.habit_entries.daily_completed)
     end
   end
 end

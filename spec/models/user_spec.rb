@@ -17,16 +17,31 @@ RSpec.describe User, type: :model do
   describe 'scopes' do
     let!(:user) { create :user }
     let!(:past_moods) { create_list :mood, 5, created_at: Date.today - 8, user_id: user.id }
-    let!(:moods) { create_list :mood, 7, user_id: user.id }
-    let!(:habit_entries) { create_list :habit_entry, 7, user_id: user.id }
+    let!(:current_day_mood) { create :mood, user_id: user.id }
+    let!(:moods) { create_list :mood, 6, user_id: user.id, created_at: Date.today - 1 }
+    let!(:habit_entries) { create_list :habit_entry, 4, user_id: user.id, status: 0 }
+    let!(:completed_habit_entries) { create_list :habit_entry, 4, user_id: user.id, status: 1 }
     let!(:past_habit_entries) { create_list :habit_entry, 7, user_id: user.id, created_at: Date.today - 8 }
 
     it 'returns moods for the week' do
-      expect(user.weekly_moods).to eq(moods.reverse)
+      (moods << current_day_mood).each do |mood|
+        expect(user.weekly_moods).to include(mood)
+      end
+      expect(user.weekly_moods).to_not include(past_moods.first)
+      expect(user.weekly_moods).to_not include(past_moods.last)
     end
 
     it 'has weekly habit entries grouped by created at' do
-      expect(user.weekly_habits).to eq(habit_entries.reverse)
+      expected = habit_entries + completed_habit_entries
+      expect(user.weekly_habits).to eq(expected.reverse)
+    end
+
+    it 'has habits completed for the day' do
+      expect(user.daily_habits).to eq(completed_habit_entries.map(&:habit_id))
+    end
+
+    it 'has mood of the day' do
+      expect(user.daily_mood).to eq(current_day_mood)
     end
   end
 end
