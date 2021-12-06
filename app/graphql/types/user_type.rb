@@ -9,16 +9,18 @@ module Types
     field :habits, [Types::HabitType]
     field :weekly_habits, [Types::HabitEntryType]
     field :weekly_moods, [Types::MoodType], null: true
-    field :monthly_moods, [Types::MoodType], null: true
     field :daily_mood, Types::MoodType, null: true
     field :daily_habits, [Types::HabitType], null: true
+    field :monthly_moods, [Types::MoodType], null: true do
+      argument :month, Int, required: false, default_value: Date.today.month
+    end
 
     def weekly_moods
       object.weekly_moods
     end
 
     def monthly_moods(month:)
-      object.moods.monthly_moods
+      object.moods.monthly_moods(month)
     end
 
     def journals
@@ -31,8 +33,10 @@ module Types
 
     def weekly_habits
       object.weekly_habits
+    end
+
     def journal_entries
-      JournalEntries.all
+      object.journal_entries.weekly_journal
     end
 
     def daily_mood
