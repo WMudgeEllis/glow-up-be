@@ -14,9 +14,13 @@ class HabitEntry < ApplicationRecord
     where(status: 1)
   }
 
+  scope :current_day, -> {
+    where('extract(day from created_at) = ?', Date.today.day)
+  }
+
   scope :daily_completed, -> {
     completed
-      .where('extract(day from created_at) = ?', Date.today.day)
+      .current_day
       .pluck(:habit_id)
   }
 end
