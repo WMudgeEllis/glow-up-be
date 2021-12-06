@@ -31,7 +31,7 @@ describe 'create habit entry' do
     post '/graphql', params: { query: update_query }
 
     expect(@user.habit_entries.count).to eq(Habit.all.count)
-    expect(@user.habit_entries[1].status).to eq(1)
+    expect(@user.habit_entries[0].status).to eq(1)
     expect(@habit.habit_entries.first.status).to eq(1)
   end
 
