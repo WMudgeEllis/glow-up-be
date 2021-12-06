@@ -12,14 +12,14 @@ module Types
     field :daily_mood, Types::MoodType, null: true
     field :daily_habits, [Types::HabitType], null: true
     field :monthly_moods, [Types::MoodType], null: true do
-      argument :month, Int, required: false, default_value: Date.today.month
+      argument :month, Int, required: false
     end
 
     def weekly_moods
       object.weekly_moods
     end
 
-    def monthly_moods(month:)
+    def monthly_moods(month: Date.today.month)
       object.moods.monthly_moods(month)
     end
 
