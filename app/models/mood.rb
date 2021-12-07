@@ -12,6 +12,6 @@ class Mood < ApplicationRecord
   }
   scope :monthly_moods, ->(month) {
     order(created_at: :desc)
-    .where('extract(month from created_at) = ?', month)
+      .where('extract(month from created_at) = ?', month)
   }
 end
