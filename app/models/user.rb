@@ -9,6 +9,11 @@ class User < ApplicationRecord
 
   validates :username, presence: true, uniqueness: true
 
+
+  def weekly_journals
+    journal_entries.weekly_journal
+  end
+
   def weekly_habits
     habit_entries
       .where('habit_entries.created_at > ?', Date.today - 7)
