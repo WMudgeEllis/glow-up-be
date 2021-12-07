@@ -8,6 +8,7 @@ module Mutations
       mood_params = Hash params
       begin
         user = User.first
+        user.daily_mood.destroy if user.daily_mood.present?
         user.moods.create!(mood_params)
 
         { user: user }

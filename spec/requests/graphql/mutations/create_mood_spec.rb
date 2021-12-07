@@ -21,9 +21,18 @@ describe 'Create Mood Mutation' do
     expect { post '/graphql', params: { query: bad_query } }
       .to change(Mood, :count)
       .by 0
-      
+
     expect(JSON.parse(response.body)).to have_key 'errors'
   end
+
+  it 'deletes previous daily mood' do
+    create(:mood, user_id: user.id)
+
+    expect { post '/graphql', params: { query: query } }
+      .to change(Mood, :count)
+      .by 0
+  end
+
 
   def query
     <<-GQL
