@@ -7,10 +7,7 @@ module Mutations
       habits = params.map { |habit| Hash habit }
       begin
         user = User.first
-        habits.each do |habit|
-          user.habit_entries.create!(habit_id: habit[:id], status: 1)
-        end
-        HabitEntry.create_neglected(user, habits)
+        HabitEntry.create_entries(user, habits)
 
         { user: user }
 
