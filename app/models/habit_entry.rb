@@ -2,19 +2,21 @@ class HabitEntry < ApplicationRecord
   belongs_to :user
   belongs_to :habit
 
-  def self.create_entries(user, habits)
-    destroy_today_entries(user)
-    completed_ids = habits.map { |habits| habits[:id] }
+  scope :completed, -> {
+    where(status: 1)
+  }
 
-    completed_ids.each do |habit_id|
-      user.habit_entries.create!(habit_id: habit_id, status: 1)
-    end
+  scope :current_day, -> {
+    where('extract(day from created_at) = ?', Time.now.utc.to_date.day)
+  }
 
-    create_neglected(user, completed_ids)
-  end
+  scope :daily_completed, -> {
+    completed
+    .current_day
+    .pluck(:habit_id)
+  }
 
   def self.destroy_today_entries(user)
-    # require "pry"; binding.pry
     current_day
       .where(user_id: user.id)
       .destroy_all
@@ -27,17 +29,14 @@ class HabitEntry < ApplicationRecord
     end
   end
 
-  scope :completed, -> {
-    where(status: 1)
-  }
+  def self.create_entries(user, habits)
+    destroy_today_entries(user)
+    completed_ids = habits.map { |habits| habits[:id] }
 
-  scope :current_day, -> {
-    where('extract(day from created_at) = ?', Time.now.utc.to_date.day)
-  }
+    completed_ids.each do |habit_id|
+      user.habit_entries.create!(habit_id: habit_id, status: 1)
+    end
 
-  scope :daily_completed, -> {
-    completed
-      .current_day
-      .pluck(:habit_id)
-  }
+    create_neglected(user, completed_ids)
+  end
 end
