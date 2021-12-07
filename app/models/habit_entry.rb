@@ -14,6 +14,7 @@ class HabitEntry < ApplicationRecord
   end
 
   def self.destroy_today_entries(user)
+    # require "pry"; binding.pry
     current_day
       .where(user_id: user.id)
       .destroy_all
@@ -31,7 +32,7 @@ class HabitEntry < ApplicationRecord
   }
 
   scope :current_day, -> {
-    where('extract(day from created_at) = ?', Date.today.day)
+    where('extract(day from created_at) = ?', Time.now.utc.to_date.day)
   }
 
   scope :daily_completed, -> {
