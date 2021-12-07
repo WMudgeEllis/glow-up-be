@@ -8,7 +8,7 @@ describe 'Fetch User Query Relationships' do
   let!(:user) do
     create(:user) do |user|
       create(:journal) do |journal|
-        create_list :journal_entry, 5, journal_id: journal.id, user_id: user.id
+        create_list :journal_entry, 10, journal_id: journal.id, user_id: user.id
       end
       create(:habit) do |habit|
         create_list :habit_entry, 5, user_id: user.id, habit_id: habit.id
@@ -38,7 +38,7 @@ describe 'Fetch User Query Relationships' do
   end
 
   it 'returns journal entry info' do
-    expect(data[:journalEntries].size).to eq 5
+    expect(data[:journalEntries].size).to eq 7
 
     data[:journalEntries].each do |entry|
       expect(entry[:id]).to_not be_empty
@@ -68,6 +68,10 @@ describe 'Fetch User Query Relationships' do
 
   it 'returns weekly habits' do
     expect(data[:weeklyHabits].size).to eq 5
+  end
+
+  it 'returns 7 journal entries' do
+    expect(data[:journalEntries].size).to eq 7
   end
 
   def query

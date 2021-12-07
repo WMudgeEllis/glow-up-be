@@ -22,6 +22,8 @@ RSpec.describe User, type: :model do
     let!(:habit_entries) { create_list :habit_entry, 4, user_id: user.id, status: 0 }
     let!(:completed_habit_entries) { create_list :habit_entry, 4, user_id: user.id, status: 1 }
     let!(:past_habit_entries) { create_list :habit_entry, 7, user_id: user.id, created_at: Date.today - 8 }
+    let!(:journal_entries) { create_list :journal_entry, 7, user_id: user.id}
+    let!(:past_journal_entries) { create_list :journal_entry, 7, user_id: user.id, created_at: Date.today - 8}
 
     it 'returns moods for the week' do
       (moods << current_day_mood).each do |mood|
@@ -42,6 +44,10 @@ RSpec.describe User, type: :model do
 
     it 'has mood of the day' do
       expect(user.daily_mood).to eq(current_day_mood)
+    end
+
+    it 'shows 7 journal entries' do
+      expect(user.weekly_journals).to eq(journal_entries.reverse)
     end
   end
 end
