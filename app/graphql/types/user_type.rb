@@ -36,7 +36,7 @@ module Types
     end
 
     def journal_entries
-      object.journal_entries.weekly_journal
+      object.weekly_journals
     end
 
     def daily_mood
