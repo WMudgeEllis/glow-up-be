@@ -16,7 +16,7 @@ class User < ApplicationRecord
 
   def weekly_habits
     habit_entries
-      .where('habit_entries.created_at > ?', Date.today - 7)
+      .where('habit_entries.created_at > ? AND habit_entries.status = 1', Date.today - 7)
       .group('habit_entries.created_at, habit_entries.id')
       .order('habit_entries.created_at DESC')
   end

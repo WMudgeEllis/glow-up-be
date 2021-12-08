@@ -34,7 +34,7 @@ RSpec.describe User, type: :model do
     end
 
     it 'has weekly habit entries grouped by created at' do
-      expected = habit_entries + completed_habit_entries
+      expected = completed_habit_entries
       expect(user.weekly_habits).to eq(expected.reverse)
     end
 
