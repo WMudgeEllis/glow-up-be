@@ -12,8 +12,8 @@ class HabitEntry < ApplicationRecord
 
   scope :daily_completed, -> {
     completed
-      .current_day
-      .pluck(:habit_id)
+    .current_day
+    .pluck(:habit_id)
   }
 
   def self.destroy_today_entries(user)
