@@ -4,6 +4,10 @@ JournalEntry.destroy_all
 Habit.destroy_all
 HabitEntry.destroy_all
 
+ActiveRecord::Base.connection.tables.each do |t|
+  ActiveRecord::Base.connection.reset_pk_sequence!(t)
+end
+
 user = User.create!(
   username: 'User',
   password: 'hello',
