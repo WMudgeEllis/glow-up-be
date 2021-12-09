@@ -5,12 +5,11 @@ module Mutations
 
     def resolve(params:)
       journal_params = Hash params
-      begin
-        user = User.first
-        user.journal_entries.create!(journal_params
-          .merge({ journal_id: Journal.first.id }))
-        { user: user }
-      end
+      user = User.first
+      user.journal_entries.create!(journal_params
+        .merge({ journal_id: Journal.first.id }))
+        
+      { user: user }
     end
   end
 end
