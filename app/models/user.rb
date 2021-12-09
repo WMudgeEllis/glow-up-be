@@ -17,14 +17,13 @@ class User < ApplicationRecord
   def weekly_habits
     habit_entries
       .where('habit_entries.created_at > ? AND habit_entries.status = 1', Date.today - 7)
-      # .group('habit_entries.created_at, habit_entries.id')
+      .group('habit_entries.created_at, habit_entries.id')
       .order('habit_entries.created_at DESC')
   end
 
   def monthly_habits(month)
     habit_entries
       .where('extract(month from habit_entries.created_at) = ? AND habit_entries.status = 1', month)
-      # .group('habit_entries.created_at, habit_entries.id')
       .order('habit_entries.created_at DESC')
   end
 
