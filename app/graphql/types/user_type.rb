@@ -14,6 +14,9 @@ module Types
     field :monthly_moods, [Types::MoodType], null: true do
       argument :month, Int, required: false
     end
+    field :monthly_habits, [Types::HabitEntryType], null: true do
+      argument :month, Int, required: false
+    end
 
     def weekly_moods
       object.weekly_moods
@@ -21,6 +24,10 @@ module Types
 
     def monthly_moods(month: Date.today.month)
       object.moods.monthly_moods(month)
+    end
+
+    def monthly_habits(month: Date.today.month)
+      object.monthly_habits(month)
     end
 
     def journals
