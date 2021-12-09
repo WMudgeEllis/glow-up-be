@@ -12,7 +12,7 @@ RSpec.describe 'monthly habits' do
     allow(Date).to receive(:today).and_return Date.new(2021,3,28)
 
     (0..40).to_a.each do |num|
-      user.habit_entries.create!(habit_id: habit.id, status: 1, created_at: Date.today - num)
+      user.habit_entries.create!(habit_id: habit.id, created_at: Date.today - num)
     end
   end
 
@@ -24,7 +24,6 @@ RSpec.describe 'monthly habits' do
     expect(data[:monthlyHabits].first).to have_key(:id)
     expect(data[:monthlyHabits].first).to have_key(:date)
     expect(data[:monthlyHabits].first).to have_key(:habitId)
-    expect(data[:monthlyHabits].first).to have_key(:status)
 
     ordered = data[:monthlyHabits].first[:date] > data[:monthlyHabits].last[:date]
 
@@ -45,7 +44,6 @@ RSpec.describe 'monthly habits' do
             id
             date
             habitId
-            status
           }
         }
       }
@@ -60,7 +58,6 @@ RSpec.describe 'monthly habits' do
             id
             date
             habitId
-            status
           }
         }
       }

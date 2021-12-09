@@ -12,9 +12,7 @@ describe 'create habit entry' do
   it 'can create a habit entry' do
     post '/graphql', params: { query: query }
 
-    expect(@user.habit_entries.count).to eq(3)
-    expect(@user.habit_entries.first.status).to eq(1)
-    expect(@habit.habit_entries.first.status).to eq(0)
+    expect(@user.habit_entries.count).to eq(2)
   end
 
   it 'returns errors when given bad query' do
@@ -30,9 +28,7 @@ describe 'create habit entry' do
 
     post '/graphql', params: { query: update_query }
 
-    expect(@user.habit_entries.count).to eq(Habit.all.count)
-    expect(@user.habit_entries[0].status).to eq(1)
-    expect(@habit.habit_entries.first.status).to eq(1)
+    expect(@user.habit_entries.count).to eq(1)
   end
 
   def query

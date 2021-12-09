@@ -11,8 +11,8 @@ describe 'Fetch User Query Relationships' do
         create_list :journal_entry, 10, journal_id: journal.id, user_id: user.id
       end
       create(:habit) do |habit|
-        create_list :habit_entry, 2, user_id: user.id, habit_id: habit.id, status: 0
-        create_list :habit_entry, 3, user_id: user.id, habit_id: habit.id, status: 1
+        create_list :habit_entry, 2, user_id: user.id, habit_id: habit.id
+        create_list :habit_entry, 3, user_id: user.id, habit_id: habit.id
       end
     end
   end
@@ -22,24 +22,11 @@ describe 'Fetch User Query Relationships' do
   it 'returns user info' do
     expect(data[:id]).to_not be_empty
     expect(data[:username]).to_not be_empty
-    expect(data[:journals]).to_not be_empty
     expect(data[:journalEntries]).to_not be_empty
-    expect(data[:habits]).to_not be_empty
-    expect(data[:habitEntries]).to_not be_empty
-  end
-
-  it 'returns journal info' do
-    expect(data[:journals].size).to eq 1
-
-    data[:journals].each do |journal|
-      expect(journal[:id]).to_not be_empty
-      expect(journal[:name]).to_not be_empty
-      expect(journal[:details]).to_not be_empty
-    end
   end
 
   it 'returns journal entry info' do
-    expect(data[:journalEntries].size).to eq 7
+    expect(data[:journalEntries].size).to eq 10
 
     data[:journalEntries].each do |entry|
       expect(entry[:id]).to_not be_empty
@@ -48,31 +35,8 @@ describe 'Fetch User Query Relationships' do
     end
   end
 
-  it 'returns habit info' do
-    expect(data[:habits].size).to eq 1
-
-    data[:habits].each do |habit|
-      expect(habit[:id]).to_not be_empty
-      expect(habit[:name]).to_not be_empty
-    end
-  end
-
-  it 'returns habit entry info' do
-    expect(data[:habitEntries].size).to eq 5
-
-    data[:habitEntries].each do |entry|
-      expect(entry[:id]).to_not be_empty
-      expect(entry[:status]).to be_an Integer
-      expect(entry[:date]).to be_a String
-    end
-  end
-
   it 'returns weekly habits' do
-    expect(data[:weeklyHabits].size).to eq 3
-  end
-
-  it 'returns 7 journal entries' do
-    expect(data[:journalEntries].size).to eq 7
+    expect(data[:weeklyHabits].size).to eq 5
   end
 
   def query
@@ -81,24 +45,10 @@ describe 'Fetch User Query Relationships' do
         fetchUser {
           id
           username
-          journals {
-            id
-            name
-            details
-          }
           journalEntries {
             id
             createdAt
             content
-          }
-          habits {
-            id
-            name
-          }
-          habitEntries {
-            id
-            status
-            date
           }
           weeklyHabits {
             id
