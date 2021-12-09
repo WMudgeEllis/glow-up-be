@@ -6,11 +6,11 @@ describe 'Fetch User Daily Mood and Habits' do
   let!(:moods2_days_ago) { create_list :mood, 3, created_at: Date.today - 2, user_id: user.id }
   let!(:mood) { create :mood, user_id: user.id, mood: 3 }
   let!(:moods_yesterday) { create_list :mood, 3, created_at: Date.today - 1, user_id: user.id }
-  let!(:yesterday_habits) { create_list :habit_entry, 3, user_id: user.id, habit_id: habits.last.id, status: 1, created_at: Date.today - 1 }
-  let!(:daily_habit1) {  create :habit_entry, user_id: user.id, habit_id: habits.first.id, status: 1, created_at: Date.today }
-  let!(:daily_habit2) {  create :habit_entry, user_id: user.id, habit_id: habits[1].id, status: 1, created_at: Date.today }
-  let!(:daily_habit3) {  create :habit_entry, user_id: user.id, habit_id: habits.last.id, status: 1, created_at: Date.today }
-  let!(:two_days_ago_habits) { create_list :habit_entry, 3, user_id: user.id, habit_id: habits.first.id, status: 1, created_at: Date.today - 2 }
+  let!(:yesterday_habits) { create_list :habit_entry, 3, user_id: user.id, habit_id: habits.last.id, created_at: Date.today - 1 }
+  let!(:daily_habit1) {  create :habit_entry, user_id: user.id, habit_id: habits.first.id, created_at: Date.today }
+  let!(:daily_habit2) {  create :habit_entry, user_id: user.id, habit_id: habits[1].id, created_at: Date.today }
+  let!(:daily_habit3) {  create :habit_entry, user_id: user.id, habit_id: habits.last.id, created_at: Date.today }
+  let!(:two_days_ago_habits) { create_list :habit_entry, 3, user_id: user.id, habit_id: habits.first.id, created_at: Date.today - 2 }
 
   let(:json) { JSON.parse(response.body, symbolize_names: true) }
   let(:mood_info) { json[:data][:fetchUser][:dailyMood] }

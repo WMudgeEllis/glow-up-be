@@ -2,19 +2,15 @@ module Types
   class UserType < Types::BaseObject
     field :id, ID, null: false
     field :username, String, null: false
-    field :moods, [Types::MoodType], null: true
     field :journal_entries, [Types::JournalEntryType]
-    field :journals, [Types::JournalType]
-    field :habit_entries, [Types::HabitEntryType]
-    field :habits, [Types::HabitType]
     field :weekly_habits, [Types::HabitEntryType]
-    field :weekly_moods, [Types::MoodType], null: true
+    field :weekly_moods, [Types::MoodType]
     field :daily_mood, Types::MoodType, null: true
-    field :daily_habits, [Types::HabitType], null: true
-    field :monthly_moods, [Types::MoodType], null: true do
+    field :daily_habits, [Types::HabitType]
+    field :monthly_moods, [Types::MoodType] do
       argument :month, Int, required: false
     end
-    field :monthly_habits, [Types::HabitEntryType], null: true do
+    field :monthly_habits, [Types::HabitEntryType] do
       argument :month, Int, required: false
     end
 
@@ -34,16 +30,8 @@ module Types
       object.moods.monthly_moods(month)
     end
 
-    def journals
-      object.journals.distinct
-    end
-
     def journal_entries
-      object.weekly_journals
-    end
-
-    def habits
-      Habit.all
+      object.all_journals
     end
 
     def daily_habits

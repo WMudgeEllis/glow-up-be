@@ -19,11 +19,9 @@ RSpec.describe User, type: :model do
     let!(:past_moods) { create_list :mood, 5, created_at: Date.today - 8, user_id: user.id }
     let!(:current_day_mood) { create :mood, user_id: user.id }
     let!(:moods) { create_list :mood, 6, user_id: user.id, created_at: Date.today - 1 }
-    let!(:habit_entries) { create_list :habit_entry, 4, user_id: user.id, status: 0 }
-    let!(:completed_habit_entries) { create_list :habit_entry, 4, user_id: user.id, status: 1 }
+    let!(:habit_entries) { create_list :habit_entry, 4, user_id: user.id }
     let!(:past_habit_entries) { create_list :habit_entry, 7, user_id: user.id, created_at: Date.today - 8 }
     let!(:journal_entries) { create_list :journal_entry, 7, user_id: user.id}
-    let!(:past_journal_entries) { create_list :journal_entry, 7, user_id: user.id, created_at: Date.today - 8}
 
     it 'returns moods for the week' do
       (moods << current_day_mood).each do |mood|
@@ -34,20 +32,19 @@ RSpec.describe User, type: :model do
     end
 
     it 'has weekly habit entries grouped by created at' do
-      expected = completed_habit_entries
-      expect(user.weekly_habits).to eq(expected.reverse)
+      expect(user.weekly_habits).to eq(habit_entries.reverse)
     end
 
     it 'has habits completed for the day' do
-      expect(user.daily_habits).to eq(completed_habit_entries.map(&:habit_id))
+      expect(user.daily_habits).to eq(habit_entries.map(&:habit_id))
     end
 
     it 'has mood of the day' do
       expect(user.daily_mood).to eq(current_day_mood)
     end
 
-    it 'shows 7 journal entries' do
-      expect(user.weekly_journals).to eq(journal_entries.reverse)
+    it 'shows all journal entries' do
+      expect(user.all_journals).to eq(journal_entries.reverse)
     end
   end
 
@@ -59,7 +56,7 @@ RSpec.describe User, type: :model do
       allow(Date).to receive(:today).and_return Date.new(2021,3,28)
 
       (0..40).to_a.each do |num|
-        user.habit_entries.create!(habit_id: habit.id, status: 1, created_at: Date.today - num)
+        user.habit_entries.create!(habit_id: habit.id, created_at: Date.today - num)
       end
     end
 

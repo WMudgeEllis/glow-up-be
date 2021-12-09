@@ -10,20 +10,20 @@ class User < ApplicationRecord
   validates :username, presence: true, uniqueness: true
 
 
-  def weekly_journals
-    journal_entries.weekly_journal
+  def all_journals
+    journal_entries.all_journals
   end
 
   def weekly_habits
     habit_entries
-      .where('habit_entries.created_at > ? AND habit_entries.status = 1', Date.today - 7)
+      .where('habit_entries.created_at > ?', Date.today - 7)
       .group('habit_entries.created_at, habit_entries.id')
       .order('habit_entries.created_at DESC')
   end
 
   def monthly_habits(month)
     habit_entries
-      .where('extract(month from habit_entries.created_at) = ? AND habit_entries.status = 1', month)
+      .where('extract(month from habit_entries.created_at) = ?', month)
       .order('habit_entries.created_at DESC')
   end
 
