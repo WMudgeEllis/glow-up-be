@@ -6,16 +6,11 @@ module Mutations
 
     def resolve(params:)
       mood_params = Hash params
-      begin
-        user = User.first
-        user.daily_mood.destroy if user.daily_mood.present?
-        user.moods.create!(mood_params)
+      user = User.first
+      user.daily_mood.destroy if user.daily_mood.present?
+      user.moods.create!(mood_params)
 
-        { user: user }
-      # rescue ActiveRecord::RecordInvalid => e
-      #   GraphQL::ExecutionError.new("Invalid attributes for #{e.record.class}: "\
-      #   "#{e.record.errors.full_messages.join(', ')}")
-      end
+      { user: user }
     end
   end
 end
