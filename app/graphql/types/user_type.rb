@@ -18,34 +18,6 @@ module Types
       argument :month, Int, required: false
     end
 
-    def weekly_moods
-      object.weekly_moods
-    end
-
-    def monthly_moods(month: Date.today.month)
-      object.moods.monthly_moods(month)
-    end
-
-    def monthly_habits(month: Date.today.month)
-      object.monthly_habits(month)
-    end
-
-    def journals
-      object.journals.distinct
-    end
-
-    def habits
-      Habit.all
-    end
-
-    def weekly_habits
-      object.weekly_habits
-    end
-
-    def journal_entries
-      object.weekly_journals
-    end
-
     def daily_mood
       mood = object.daily_mood
 
@@ -54,8 +26,36 @@ module Types
       mood
     end
 
+    def weekly_moods
+      object.weekly_moods
+    end
+
+    def monthly_moods(month: Date.today.month)
+      object.moods.monthly_moods(month)
+    end
+
+    def journals
+      object.journals.distinct
+    end
+
+    def journal_entries
+      object.weekly_journals
+    end
+
+    def habits
+      Habit.all
+    end
+
     def daily_habits
       Habit.find(object.daily_habits)
+    end
+
+    def weekly_habits
+      object.weekly_habits
+    end
+
+    def monthly_habits(month: Date.today.month)
+      object.monthly_habits(month)
     end
   end
 end
