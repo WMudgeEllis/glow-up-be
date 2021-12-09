@@ -11,8 +11,8 @@ describe 'Fetch User Query Relationships' do
         create_list :journal_entry, 10, journal_id: journal.id, user_id: user.id
       end
       create(:habit) do |habit|
-        create_list :habit_entry, 2, user_id: user.id, habit_id: habit.id, status: 0
-        create_list :habit_entry, 3, user_id: user.id, habit_id: habit.id, status: 1
+        create_list :habit_entry, 2, user_id: user.id, habit_id: habit.id
+        create_list :habit_entry, 3, user_id: user.id, habit_id: habit.id
       end
     end
   end
@@ -36,7 +36,7 @@ describe 'Fetch User Query Relationships' do
   end
 
   it 'returns weekly habits' do
-    expect(data[:weeklyHabits].size).to eq 3
+    expect(data[:weeklyHabits].size).to eq 5
   end
 
   def query
