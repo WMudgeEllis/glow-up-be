@@ -55,7 +55,7 @@ module Types
     end
 
     def daily_habits
-      Habit.find(object.habit_entries.daily_completed)
+      Habit.find(object.daily_habits)
     end
   end
 end
