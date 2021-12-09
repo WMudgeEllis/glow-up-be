@@ -10,6 +10,7 @@ class Mood < ApplicationRecord
   scope :current_day_mood, -> {
     find_by('extract(day from created_at) = ?', Time.now.utc.to_date.day)
   }
+
   scope :monthly_moods, ->(month) {
     order(created_at: :desc)
       .where('extract(month from created_at) = ?', month)
