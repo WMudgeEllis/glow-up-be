@@ -15,10 +15,5 @@ RSpec.describe JournalEntry, type: :model do
     it 'returns last 7 journal entries' do
       expect(user.journal_entries.weekly_journal).to eq(journal_entry.reverse)
     end
-
-    it 'creates new journal entries' do
-      JournalEntry.create!(content: 'something', user_id: user.id, journal_id: journal.id)
-      expect(journal.journal_entries.count).to eq(13)
-    end
   end
 end
