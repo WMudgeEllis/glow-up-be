@@ -21,6 +21,12 @@ class User < ApplicationRecord
       .order('habit_entries.created_at DESC')
   end
 
+  def monthly_habits(month)
+    habit_entries
+      .where('extract(month from habit_entries.created_at) = ? AND habit_entries.status = 1', month)
+      .order('habit_entries.created_at DESC')
+  end
+
   def weekly_moods
     moods.weekly_moods
   end

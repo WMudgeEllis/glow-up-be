@@ -50,4 +50,24 @@ RSpec.describe User, type: :model do
       expect(user.weekly_journals).to eq(journal_entries.reverse)
     end
   end
+
+  describe 'monthly habit entries' do
+    let!(:user) { create :user }
+    let!(:habit) { create :habit }
+
+    before :each do
+      allow(Date).to receive(:today).and_return Date.new(2021,3,28)
+
+      (0..40).to_a.each do |num|
+        user.habit_entries.create!(habit_id: habit.id, status: 1, created_at: Date.today - num)
+      end
+    end
+
+    it 'returns monthly habit entries' do
+      result = user.monthly_habits(3)
+
+      expect(result.length).to eq(28)
+      expect(result.first).to be_a(HabitEntry)
+    end
+  end
 end
