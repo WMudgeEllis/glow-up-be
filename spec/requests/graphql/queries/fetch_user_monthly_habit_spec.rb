@@ -4,7 +4,7 @@ require "rails_helper"
 RSpec.describe 'monthly habits' do
   let(:json) { JSON.parse(response.body, symbolize_names: true) }
   let(:reduced) { json[:data] }
-  let(:data) { reduced[:fetchUser][:data] }
+  let(:data) { json[:data][:fetchUser] }
   let!(:user) { create :user }
   let!(:habit) { create :habit }
 
@@ -20,13 +20,13 @@ RSpec.describe 'monthly habits' do
     post '/graphql', params: { query: query }
 
     expect(data).to have_key(:monthlyHabits)
-    expect(data[:monthlyHabits].length).to eq(30)
+    expect(data[:monthlyHabits].length).to eq(28)
     expect(data[:monthlyHabits].first).to have_key(:id)
     expect(data[:monthlyHabits].first).to have_key(:date)
     expect(data[:monthlyHabits].first).to have_key(:habitId)
     expect(data[:monthlyHabits].first).to have_key(:status)
 
-    ordered = data[:monthlyHabits].first.date > data[:monthlyHabits].last.date
+    ordered = data[:monthlyHabits].first[:date] > data[:monthlyHabits].last[:date]
 
     expect(ordered).to eq(true)
   end
