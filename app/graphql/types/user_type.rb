@@ -31,9 +31,9 @@ module Types
     end
 
     def journal_entries
-      object.weekly_journals
+      object.all_journals
     end
-    
+
     def daily_habits
       Habit.find(object.daily_habits)
     end

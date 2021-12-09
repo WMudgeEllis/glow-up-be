@@ -10,8 +10,8 @@ class User < ApplicationRecord
   validates :username, presence: true, uniqueness: true
 
 
-  def weekly_journals
-    journal_entries.weekly_journal
+  def all_journals
+    journal_entries.all_journals
   end
 
   def weekly_habits
