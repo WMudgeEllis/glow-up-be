@@ -3,7 +3,7 @@ class HabitEntry < ApplicationRecord
   belongs_to :habit
 
   scope :current_day, -> {
-    where('extract(day from created_at) = ?', Time.now.utc.to_date.day)
+    where('extract(day from created_at) = ?', Date.current.day)
   }
 
   scope :daily_completed, -> {
