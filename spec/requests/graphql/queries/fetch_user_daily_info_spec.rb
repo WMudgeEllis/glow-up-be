@@ -31,6 +31,30 @@ describe 'Fetch User Daily Mood and Habits' do
     expect(habit_info.last[:id].to_i).to eq(habits.last.id)
   end
 
+  it 'returns error with no daily mood' do
+    (3..31).to_a.each do |num|
+      create(:mood, user_id: user.id, created_at: Date.current - num)
+    end
+
+    Mood.current_day_mood.destroy
+
+    post '/graphql', params: { query: mood_query }
+
+    expect(json[:data]).to have_key(:errors)
+  end
+
+
+  it 'returns only todays completed habits' do
+    new_habit = create(:habit)
+    (3..63).to_a.each do |num|
+      create(:habit_entry, user_id: user.id, habit_id: new_habit.id, created_at: Date.current - num)
+    end
+
+    post '/graphql', params: { query: habits_query }
+    
+    expect(habit_info.last[:id].to_i).to eq(habits.last.id)
+  end
+
   def mood_query
     <<-GQL
       query {
