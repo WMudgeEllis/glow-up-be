@@ -36,11 +36,11 @@ describe 'Fetch User Daily Mood and Habits' do
       create(:mood, user_id: user.id, created_at: Date.current - num)
     end
 
-    Mood.current_day_mood.destroy
+    mood.destroy
 
     post '/graphql', params: { query: mood_query }
 
-    expect(json[:data]).to have_key(:errors)
+    expect(json).to have_key(:errors)
   end
 
 
@@ -51,7 +51,7 @@ describe 'Fetch User Daily Mood and Habits' do
     end
 
     post '/graphql', params: { query: habits_query }
-    
+
     expect(habit_info.last[:id].to_i).to eq(habits.last.id)
   end
 
