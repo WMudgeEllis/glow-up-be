@@ -4,7 +4,8 @@ class Mood < ApplicationRecord
   validates :mood, presence: true
 
   scope :weekly_moods, -> {
-    order(created_at: :desc).limit(7)
+    where(created_at: (Date.current - 6)..Date.current.end_of_day)
+      .order(created_at: :desc)
   }
 
   scope :current_day_mood, -> {

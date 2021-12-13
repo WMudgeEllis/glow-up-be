@@ -36,6 +36,6 @@ class User < ApplicationRecord
   end
 
   def daily_mood
-    moods.current_day_mood
+    moods.find_by(created_at: Date.current.all_day)
   end
 end
