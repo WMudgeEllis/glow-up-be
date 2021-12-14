@@ -11,7 +11,8 @@ end
 user = User.create!(
   username: 'User',
   password: 'hello',
-  password_confirmation: 'hello'
+  password_confirmation: 'hello',
+  email: 'generic.address@custom.com'
 )
 
 (1..30).to_a.each do |num|
