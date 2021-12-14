@@ -20,7 +20,7 @@ describe 'Fetch User Weekly Moods' do
     result = data[:weeklyMoods].first[:createdAt] > data[:weeklyMoods].last[:createdAt]
 
     expect(json).to_not have_key(:errors)
-    expect(data[:weeklyMoods].length).to eq(6)
+    expect(data[:weeklyMoods].length).to eq(5)
     expect(result).to be(true)
   end
 
