@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'from@example.com'
+  default from: 'glow.up.noreply@gmail.com'
   layout 'mailer'
 end

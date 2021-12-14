@@ -40,6 +40,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'simplecov'
+  gem 'figaro'
 end
 
 group :development do
