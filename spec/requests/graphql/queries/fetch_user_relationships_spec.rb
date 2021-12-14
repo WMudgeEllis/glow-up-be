@@ -30,7 +30,7 @@ describe 'Fetch User Query Relationships' do
 
     data[:journalEntries].each do |entry|
       expect(entry[:id]).to_not be_empty
-      expect(entry[:createdAt]).to_not be_empty
+      expect(entry[:date]).to_not be_empty
       expect(entry[:content]).to_not be_empty
     end
   end
@@ -47,7 +47,7 @@ describe 'Fetch User Query Relationships' do
           username
           journalEntries {
             id
-            createdAt
+            date
             content
           }
           weeklyHabits {
