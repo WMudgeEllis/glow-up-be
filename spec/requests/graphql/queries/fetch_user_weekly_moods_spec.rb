@@ -3,10 +3,10 @@ require 'rails_helper'
 describe 'Fetch User Weekly Moods' do
   let!(:user) { create :user }
   let!(:moods) do
-    create_list :mood, 3, user_id: user.id, created_at: Date.today - 8
+    create_list :mood, 3, user_id: user.id, created_at: Date.current - 8
 
     (0..7).each do |num|
-      create :mood, user_id: user.id, created_at: Date.today - num unless num == 2
+      create :mood, user_id: user.id, created_at: Date.current - num unless num == 2
     end
   end
 
@@ -20,7 +20,7 @@ describe 'Fetch User Weekly Moods' do
     result = data[:weeklyMoods].first[:createdAt] > data[:weeklyMoods].last[:createdAt]
 
     expect(json).to_not have_key(:errors)
-    expect(data[:weeklyMoods].length).to eq(5)
+    expect(data[:weeklyMoods].length).to eq(6)
     expect(result).to be(true)
   end
 
