@@ -1,56 +1,54 @@
-# GlowUp Back End Application
+![](https://img.shields.io/badge/Ruby-2.7.2-red)![](https://img.shields.io/badge/Rails-5.2.6-red)![GitHub Actions](https://github.com/bullet-capstone/glow-up-be/actions/workflows/ci.yml/badge.svg)![Heroku](https://img.shields.io/badge/Heroku-430098.svg?&style=flaste&logo=heroku&logoColor=white) ![](https://img.shields.io/badge/-GraphQL-blue)
 
-This is the back end repository for the project glow up. The front repo is [here](https://github.com/bullet-capstone/glow-up-fe). This repository is responsible for storing and serving data to the front end application which handles the presentation of data.
+# [GlowUp](https://bullet-capstone.github.io/glow-up-fe/) Back End Application
 
-The base url for the production server is https://glowup-be.herokuapp.com/
+This is the back-end application repository for [GlowUp](https://bullet-capstone.github.io/glow-up-fe/).
+The front-end repository can be found [here](https://github.com/bullet-capstone/glow-up-fe).
 
-If you would like to visit our front-end production environment, you can access it [here](https://bullet-capstone.github.io/glow-up-fe/)
 
-### Schema
 
-![Screen Shot 2021-12-08 at 1 56 33 PM](https://user-images.githubusercontent.com/84806907/145283660-625b735b-7ddb-430a-88ad-84797ff6ab5b.png)
-
-### Ruby/Rails versions
+### Primary Technologies
 
   - Ruby 2.7.2
   - Rails 5.2.6
+  - PostgreSQL
+  - [GraphQL](https://graphql.org/)
+  - [RSpec](https://rspec.info/)
 
-### Gem Documentation:
+### Local Set-Up
 
-  -  [shoulda-matchers](https://github.com/thoughtbot/shoulda-matchers)
-  -  [pry](https://github.com/pry/pry)
-  -  [simplecov](https://github.com/simplecov-ruby/simplecov)
-  -  [factory_bot](https://github.com/thoughtbot/factory_bot)
-  -  [faker](https://github.com/faker-ruby/faker)
-  -  [graphql](https://graphql.org/)
+`git clone git@github.com:bullet-capstone/glow-up-be.git`
 
-### Languages:
-![ActiveRecord](https://img.shields.io/badge/ActiveRecord-CC0000.svg?&style=flaste&logo=rubyonrails&logoColor=white)
-![Ruby](https://img.shields.io/badge/Ruby-CC0000.svg?&style=flaste&logo=ruby&logoColor=white)
+`bundle install`
 
-### Deployment Tools:
-![Heroku](https://img.shields.io/badge/Heroku-430098.svg?&style=flaste&logo=heroku&logoColor=white)
-![GitHub Actions](https://github.com/bullet-capstone/glow-up-be/actions/workflows/ci.yml/badge.svg)
-
-#### Development Principles
-<p>
-  <img src="https://img.shields.io/badge/OOP-b81818.svg?&style=flaste&logo=OOP&logoColor=white" />
-  <img src="https://img.shields.io/badge/TDD-b87818.svg?&style=flaste&logo=TDD&logoColor=white" />
-</p>
+`rails db:{create,migrate,seed}`
 
 
-### Deployment instructions
+### Testing
 
-  ```
-  git clone git@github.com:bullet-capstone/glow-up-be.git
+Testing is done with [RSpec](https://rspec.info/) with coverage details provided by [SimpleCov](https://github.com/simplecov-ruby/simplecov).
 
-  bundle install
+#### Test Suite Execution
 
-  rails db:{create,migrate,seed}
+`bundle exec rspec`
 
-  ```
+#### Integrations
+  -  [Pry](https://github.com/pry/pry)
+  -  [Faker](https://github.com/faker-ruby/faker)
+  -  [FactoryBot](https://github.com/thoughtbot/factory_bot)
+  -  [Shoulda-Matchers](https://github.com/thoughtbot/shoulda-matchers)
 
+### GraphQL Playground
 
-### How to run the test suite
+GraphQL queries are fully interactive in the development environment using [GraphiQL](https://github.com/graphql/graphiql).
 
-  `bundle exec rspec`
+Initialize your development server and navigate to `localhost:3001/graphiql` to view and execute available queries and mutations.
+
+### Database Design
+
+![Screen Shot 2021-12-08 at 1 56 33 PM](https://user-images.githubusercontent.com/84806907/145283660-625b735b-7ddb-430a-88ad-84797ff6ab5b.png)
+
+### Contributors
+
+- Tanner Dale [![](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/tannerdale/) [![](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/TannerDale)
+- Weston Ellis [![](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/weston-mudge-ellis/) [![](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/WMudgeEllis/)
