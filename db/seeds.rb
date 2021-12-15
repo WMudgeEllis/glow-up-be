@@ -26,10 +26,10 @@ end
 
 j = Journal.create!(name: 'daily', details: 'J')
 
-(1..30).to_a.each do |num|
+(1..10).to_a.sample(3).each do |num|
   JournalEntry.create!(
     date: Date.today - num,
-    content: 'something really important',
+    content: 'Today I felt like journaling',
     user_id: User.first.id,
     journal: j
   )
@@ -53,7 +53,7 @@ h15 = Habit.create!(name: 'Plan Tomorrow')
 
 
 
-(1..30).to_a.each do |num|
+(1..7).to_a.sample(3).each do |num|
   h1.habit_entries.create!(
     created_at: Date.today - num,
     user_id: User.first.id,
@@ -61,7 +61,7 @@ h15 = Habit.create!(name: 'Plan Tomorrow')
   )
 end
 
-(1..17).to_a.each do |num|
+(1..7).to_a.sample(3).each do |num|
   h2.habit_entries.create!(
     created_at: Date.today - num,
     user_id: User.first.id,
@@ -69,7 +69,7 @@ end
   )
 end
 
-(1..10).to_a.each do |num|
+(1..7).to_a.sample(3).each do |num|
   h3.habit_entries.create!(
     created_at: Date.today - num,
     user_id: User.first.id,
@@ -77,7 +77,7 @@ end
   )
 end
 
-(1..20).to_a.each do |num|
+(1..7).to_a.sample(3).each do |num|
   h4.habit_entries.create!(
     created_at: Date.today - num,
     user_id: User.first.id,
@@ -85,7 +85,7 @@ end
   )
 end
 
-(1..30).to_a.each do |num|
+(1..7).to_a.sample(3).each do |num|
   h5.habit_entries.create!(
     created_at: Date.today - num,
     user_id: User.first.id,
@@ -93,7 +93,7 @@ end
   )
 end
 
-(1..12).to_a.each do |num|
+(1..7).to_a.sample(3).each do |num|
   h6.habit_entries.create!(
     created_at: Date.today - num,
     user_id: User.first.id,
@@ -101,7 +101,7 @@ end
   )
 end
 
-(1..15).to_a.each do |num|
+(1..7).to_a.sample(3).each do |num|
   h7.habit_entries.create!(
     created_at: Date.today - num,
     user_id: User.first.id,
@@ -109,7 +109,7 @@ end
   )
 end
 
-(1..10).to_a.each do |num|
+(1..7).to_a.sample(3).each do |num|
   h8.habit_entries.create!(
     created_at: Date.today - num,
     user_id: User.first.id,
@@ -117,7 +117,7 @@ end
   )
 end
 
-(1..20).to_a.each do |num|
+(1..7).to_a.sample(3).each do |num|
   h9.habit_entries.create!(
     created_at: Date.today - num,
     user_id: User.first.id,
@@ -125,7 +125,7 @@ end
   )
 end
 
-(1..10).to_a.each do |num|
+(1..7).to_a.sample(3).each do |num|
   h10.habit_entries.create!(
     created_at: Date.today - num,
     user_id: User.first.id,
@@ -133,42 +133,42 @@ end
   )
 end
 
-(1..10).to_a.each do |num|
+(1..10).to_a.sample(3).each do |num|
   h11.habit_entries.create!(
     created_at: Date.today - num,
     user_id: User.first.id,
-    habit_id: h10.id
+    habit_id: h11.id
   )
 end
 
-(1..10).to_a.each do |num|
+(1..10).to_a.sample(3).each do |num|
   h12.habit_entries.create!(
     created_at: Date.today - num,
     user_id: User.first.id,
-    habit_id: h10.id
+    habit_id: h12.id
   )
 end
 
-(1..10).to_a.each do |num|
+(1..10).to_a.sample(3).each do |num|
   h13.habit_entries.create!(
     created_at: Date.today - num,
     user_id: User.first.id,
-    habit_id: h10.id
+    habit_id: h13.id
   )
 end
 
-(1..10).to_a.each do |num|
+(1..10).to_a.sample(3).each do |num|
   h14.habit_entries.create!(
     created_at: Date.today - num,
     user_id: User.first.id,
-    habit_id: h10.id
+    habit_id: h14.id
   )
 end
 
-(1..10).to_a.each do |num|
+(1..10).to_a.sample(3).each do |num|
   h15.habit_entries.create!(
     created_at: Date.today - num,
     user_id: User.first.id,
-    habit_id: h10.id
+    habit_id: h15.id
   )
 end
