@@ -50,5 +50,5 @@ Initialize your development server and navigate to `localhost:3001/graphiql` to 
 
 ### Contributors
 
-- Tanner Dale [![](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/tannerdale/) [![](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/TannerDale)
-- Weston Ellis [![](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/weston-mudge-ellis/) [![](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/WMudgeEllis/)
+- Tanner Dale [LinkedIn](https://www.linkedin.com/in/tannerdale/) [GitHub](http[s://github.com/TannerDale)
+- Weston Ellis [LinkedIn](https://www.linkedin.com/in/weston-mudge-ellis/) [GitHub](https://github.com/WMudgeEllis/)
