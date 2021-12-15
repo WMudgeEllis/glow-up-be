@@ -50,5 +50,5 @@ Initialize your development server and navigate to `localhost:3001/graphiql` to 
 
 ### Contributors
 
-- Tanner Dale [LinkedIn](https://www.linkedin.com/in/tannerdale/) [GitHub](http[s://github.com/TannerDale)
+- Tanner Dale [LinkedIn](https://www.linkedin.com/in/tannerdale/) [GitHub](https://github.com/TannerDale)
 - Weston Ellis [LinkedIn](https://www.linkedin.com/in/weston-mudge-ellis/) [GitHub](https://github.com/WMudgeEllis/)
