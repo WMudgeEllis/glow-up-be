@@ -28,7 +28,7 @@ j = Journal.create!(name: 'daily', details: 'J')
 
 (1..10).to_a.sample(3).each do |num|
   JournalEntry.create!(
-    date: Date.today - num,
+    created_at: Date.today - num,
     content: 'Today I felt like journaling',
     user_id: User.first.id,
     journal: j
