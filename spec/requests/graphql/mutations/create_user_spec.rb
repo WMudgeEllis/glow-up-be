@@ -1,10 +1,18 @@
 require "rails_helper"
 
 RSpec.describe 'create user' do
-  it 'can create a user' do
-    post '/graphql', params: { query: query }
+  let(:json) { JSON.parse(response.body, symbolize_names: true) }
+  let(:data) { json[:data][:createUser] }
 
+  before { post '/graphql', params: { query: query } }
+
+  it 'can create a user' do
     expect(User.count).to eq(1)
+  end
+
+  it 'returns username and token' do
+    expect(data[:user][:username]).to eq('Testing')
+    expect(data[:token]).to be_a(String)
   end
 
   def query
@@ -14,12 +22,16 @@ RSpec.describe 'create user' do
           input:{
             params:{
               username: "Testing",
+              email: "email@email.com"
               password: "Seecrit",
               passwordConfirmation: "Seecrit"
             }
           }
         ) {
-          clientMutationId
+          user {
+            username
+          }
+          token
         }
       }
     GQL
