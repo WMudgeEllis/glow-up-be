@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  include TokenGenerator
   has_secure_password
 
   has_many :moods, dependent: :destroy
@@ -8,7 +9,9 @@ class User < ApplicationRecord
   has_many :habits, through: :habit_entries
 
   validates :username, presence: true, uniqueness: true
-
+  validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :password, presence: true
+  validates :password_confirmation, presence: true, on: :create
 
   def all_journals
     journal_entries.all_journals
