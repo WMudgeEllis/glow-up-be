@@ -54,6 +54,10 @@ Tanner Dale
 - [LinkedIn](https://www.linkedin.com/in/tannerdale/)
 - [GitHub](https://github.com/TannerDale)
 
+Laura Court
+- [LinkedIn](https://www.linkedin.com/in/laura-court/)
+- [GitHub](https://github.com/Lmcourt)
+
 Weston Ellis
 - [LinkedIn](https://www.linkedin.com/in/weston-mudge-ellis/)
 - [GitHub](https://github.com/WMudgeEllis/)
