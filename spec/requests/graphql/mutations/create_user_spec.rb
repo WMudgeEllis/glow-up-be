@@ -10,8 +10,7 @@ RSpec.describe 'create user' do
     expect(User.count).to eq(1)
   end
 
-  it 'returns username and token' do
-    expect(data[:user][:username]).to eq('Testing')
+  it 'can return a token' do
     expect(data[:token]).to be_a(String)
   end
 
@@ -28,9 +27,6 @@ RSpec.describe 'create user' do
             }
           }
         ) {
-          user {
-            username
-          }
           token
         }
       }
