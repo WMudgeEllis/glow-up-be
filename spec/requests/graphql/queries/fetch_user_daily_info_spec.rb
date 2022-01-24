@@ -58,7 +58,7 @@ describe 'Fetch User Daily Mood and Habits' do
   def mood_query
     <<-GQL
       query {
-        fetchUser {
+        fetchUser(token: "#{user_token}") {
           dailyMood {
             id
             mood
@@ -71,7 +71,7 @@ describe 'Fetch User Daily Mood and Habits' do
   def habits_query
     <<-GQL
       query {
-        fetchUser {
+        fetchUser(token: "#{user_token}") {
           dailyHabits {
             id
             name
@@ -79,5 +79,33 @@ describe 'Fetch User Daily Mood and Habits' do
         }
       }
     GQL
+  end
+
+  def login_query
+    <<-GQL
+      mutation{
+        signInUser(
+          input:{
+            params:{
+              username: "#{user.username}",
+              password: "#{user.password}",
+            }
+          }
+        ) {
+        user {
+          username
+        }
+        token
+        }
+      }
+    GQL
+  end
+
+  def user_token
+    post '/graphql', params: { query: login_query }
+
+    body = JSON.parse(response.body, symbolize_names: true)
+
+    body[:data][:signInUser][:token]
   end
 end

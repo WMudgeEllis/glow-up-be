@@ -18,7 +18,6 @@ RSpec.describe 'monthly habits' do
 
   it 'returns monthly habits with default' do
     post '/graphql', params: { query: query }
-
     expect(data).to have_key(:monthlyHabits)
     expect(data[:monthlyHabits].length).to eq(28)
     expect(data[:monthlyHabits].first).to have_key(:id)
@@ -39,7 +38,7 @@ RSpec.describe 'monthly habits' do
   def query
     <<~GQL
       query {
-        fetchUser {
+        fetchUser(token: "#{user_token}") {
           monthlyHabits {
             id
             date
@@ -53,7 +52,7 @@ RSpec.describe 'monthly habits' do
   def query_specified
     <<~GQL
       query {
-        fetchUser {
+        fetchUser(token: "#{user_token}") {
           monthlyHabits(month: 2) {
             id
             date
@@ -62,5 +61,33 @@ RSpec.describe 'monthly habits' do
         }
       }
     GQL
+  end
+
+  def login_query
+    <<-GQL
+      mutation{
+        signInUser(
+          input:{
+            params:{
+              username: "#{user.username}",
+              password: "#{user.password}",
+            }
+          }
+        ) {
+        user {
+          username
+        }
+        token
+        }
+      }
+    GQL
+  end
+
+  def user_token
+    post '/graphql', params: { query: login_query }
+
+    body = JSON.parse(response.body, symbolize_names: true)
+
+    body[:data][:signInUser][:token]
   end
 end
