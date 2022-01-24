@@ -42,7 +42,7 @@ describe 'Fetch User Query Relationships' do
   def query
     <<~GQL
       query fetchUser {
-        fetchUser {
+        fetchUser(token: "#{user_token}") {
           id
           username
           journalEntries {
@@ -56,5 +56,33 @@ describe 'Fetch User Query Relationships' do
         }
       }
     GQL
+  end
+
+  def login_query
+    <<-GQL
+      mutation{
+        signInUser(
+          input:{
+            params:{
+              username: "#{user.username}",
+              password: "#{user.password}",
+            }
+          }
+        ) {
+        user {
+          username
+        }
+        token
+        }
+      }
+    GQL
+  end
+
+  def user_token
+    post '/graphql', params: { query: login_query }
+
+    body = JSON.parse(response.body, symbolize_names: true)
+
+    body[:data][:signInUser][:token]
   end
 end
