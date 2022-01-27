@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   include TokenGenerator
+  extend TokenDecryptor
+
   has_secure_password
 
   has_many :moods, dependent: :destroy
@@ -12,6 +14,10 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, presence: true
   validates :password_confirmation, presence: true, on: :create
+
+  def self.decrypt_and_find(token)
+    find_by(id: decrypt(token))
+  end
 
   def all_journals
     journal_entries.all_journals
