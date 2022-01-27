@@ -16,8 +16,9 @@ module Mutations
         { user: user, token: token }
       else
         errors = user.errors.full_messages
-        raise GraphQL::ExecutionError, { errors: errors.to_sentence }
+        raise GraphQL::ExecutionError, errors.to_sentence
       end
     end
   end
 end
+gs
