@@ -8,17 +8,16 @@ module Mutations
       user_params = Hash params
 
       # user = User.create!(user_params)
-      # token = user.generate_token
 
       user = User.new(user_params)
+      token = user.generate_token
 
       if user.save
         { user: user, token: token }
       else
         errors = user.errors.full_messages
-        raise GraphQL::ExecutionError, errors.to_sentence
+        raise GraphQL::ExecutionError, { message: errors.to_sentence }
       end
     end
   end
 end
-gs
