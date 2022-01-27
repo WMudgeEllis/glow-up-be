@@ -67,4 +67,25 @@ RSpec.describe User, type: :model do
       expect(result.first).to be_a(HabitEntry)
     end
   end
+
+  describe 'token' do
+    let!(:user) { create :user }
+    let!(:token) { user.generate_token }
+
+    it 'can generate a token' do
+      expect(token).to be_a String
+    end
+
+    it 'can decrypt a token' do
+      expect(User.decrypt(token)).to eq user.id
+    end
+
+    it 'can find a user after decrypting a token' do
+      expect(User.decrypt_and_find(token)).to eq user
+    end
+
+    it 'raises an error when the token is invalid' do
+      expect { User.decrypt('asdfasdfafd') }.to raise_error GraphQL::ExecutionError
+    end
+  end
 end
