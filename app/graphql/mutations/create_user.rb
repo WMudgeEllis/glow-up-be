@@ -2,7 +2,7 @@ module Mutations
   class CreateUser < Mutations::BaseMutation
     argument :params, Types::Input::UserCreateInputType, required: true
 
-    field :token, String, null: true
+    field :token, String, null: false
 
     def resolve(params:)
       user_params = Hash params
