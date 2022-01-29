@@ -7,39 +7,33 @@ RSpec.describe HabitEntry, type: :model do
   end
 
   describe 'mutations' do
-    before :each do
-      @user = create(:user)
-      @habit = create(:habit)
-      create_list(:habit, 14)
-    end
+    let!(:user) { create :user }
+    let!(:habit) { create :habit }
+    let!(:habits) { create_list :habit, 14 }
+
+    before { HabitEntry.create_entries(user, [{ id: habit.id }]) }
 
     it 'creates habit entries for completed habits' do
-      HabitEntry.create_entries(@user, [{ id: @habit.id }])
-
-      expect(@user.habit_entries.count).to eq(1)
+      expect(user.habit_entries.count).to eq(1)
     end
 
     it 'can update habit entries' do
-      HabitEntry.create_entries(@user, [{id: @habit.id}])
-
-      expect(@user.habit_entries.count).to eq(1)
+      expect(user.habit_entries.count).to eq(1)
     end
 
     it 'is date sensitive' do
-      create(:habit_entry, user_id: @user.id, habit_id: @habit.id, created_at: Date.today - 1)
+      create(:habit_entry, user_id: user.id, habit_id: habit.id, created_at: Date.today - 1)
 
-      HabitEntry.create_entries(@user, [{id: @habit.id}])
-
-      expect(@user.habit_entries.count).to eq(2)
+      expect(user.habit_entries.count).to eq(2)
     end
 
     it 'can destroy all entries for today' do
-      create(:habit_entry, user_id: @user.id, habit_id: @habit.id, created_at: Date.today - 1)
-      create_list(:habit_entry, 3, user_id: @user.id, habit_id: @habit.id)
+      create(:habit_entry, user_id: user.id, habit_id: habit.id, created_at: Date.today - 1)
+      create_list(:habit_entry, 3, user_id: user.id, habit_id: habit.id)
 
-      HabitEntry.destroy_today_entries(@user)
+      HabitEntry.destroy_today_entries(user)
 
-      expect(@user.habit_entries.count).to eq(1)
+      expect(user.habit_entries.count).to eq(1)
     end
   end
 
@@ -51,6 +45,14 @@ RSpec.describe HabitEntry, type: :model do
 
     it 'has all completed today' do
       expect(user.habit_entries.daily_completed).to eq(completed_today.map(&:habit_id))
+    end
+
+    describe 'formatting created at' do
+      let(:formatted_date) { completed_today.first.created_at.strftime('%m/%d/%Y') }
+
+      it 'formats the mood' do
+        expect(completed_today.first.date).to eq formatted_date
+      end
     end
   end
 end
