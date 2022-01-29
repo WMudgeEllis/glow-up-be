@@ -30,10 +30,14 @@ class User < ApplicationRecord
       .order('habit_entries.created_at DESC')
   end
 
-  def monthly_habits(month)
+  def monthly_habits(month = Date.today.month)
     habit_entries
       .where('extract(month from habit_entries.created_at) = ?', month)
       .order('habit_entries.created_at DESC')
+  end
+
+  def grouped_monthly_habits
+    monthly_habits.group_by(&:created_at).values
   end
 
   def weekly_moods
