@@ -43,7 +43,7 @@ module Types
     end
 
     def monthly_habits(month: Date.today.month)
-      object.monthly_habits
+      object.monthly_habits(month)
     end
   end
 end

@@ -30,7 +30,7 @@ class User < ApplicationRecord
       .order('habit_entries.created_at DESC')
   end
 
-  def monthly_habits(month = Date.today.month)
+  def monthly_habits(month)
     habit_entries
       .where('extract(month from habit_entries.created_at) = ?', month)
       .order('habit_entries.created_at DESC')
