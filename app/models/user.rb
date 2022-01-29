@@ -36,10 +36,6 @@ class User < ApplicationRecord
       .order('habit_entries.created_at DESC')
   end
 
-  def grouped_monthly_habits
-    monthly_habits.group_by(&:created_at).values
-  end
-
   def weekly_moods
     moods.weekly_moods
   end
