@@ -3,6 +3,10 @@ class Mood < ApplicationRecord
 
   validates :mood, presence: true
 
+  def date
+    created_at.strftime('%m/%d/%Y')
+  end
+
   scope :weekly_moods, -> {
     where(created_at: (Date.current - 6)..Date.current.end_of_day)
       .order(created_at: :desc)

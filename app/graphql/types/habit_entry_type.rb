@@ -6,7 +6,7 @@ module Types
     field :date, String, null: false
 
     def date
-      object.created_at
+      object.date
     end
   end
 end

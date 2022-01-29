@@ -2,6 +2,10 @@ class HabitEntry < ApplicationRecord
   belongs_to :user
   belongs_to :habit
 
+  def date
+    created_at.strftime('%m/%d/%Y')
+  end
+
   scope :current_day, -> {
     where(created_at: Date.current.all_day)
   }
@@ -18,7 +22,7 @@ class HabitEntry < ApplicationRecord
 
   def self.create_entries(user, habits)
     destroy_today_entries(user)
-    completed_ids = habits.map { |habits| habits[:id] }
+    completed_ids = habits.map { |habit| habit[:id] }
 
     completed_ids.each do |habit_id|
       user.habit_entries.create!(habit_id: habit_id)

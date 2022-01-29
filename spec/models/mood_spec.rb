@@ -32,4 +32,14 @@ RSpec.describe Mood, type: :model do
       expect(user.moods.monthly_moods(11)).to eq(monthly_mood)
     end
   end
+
+  describe 'formatting created at' do
+    let!(:user) { create :user }
+    let!(:mood_of_day) { create :mood, user_id: user.id }
+    let(:formatted_date) { mood_of_day.created_at.strftime('%m/%d/%Y') }
+
+    it 'formats the mood' do
+      expect(mood_of_day.date).to eq formatted_date
+    end
+  end
 end
