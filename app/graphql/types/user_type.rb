@@ -14,14 +14,6 @@ module Types
       argument :month, Int, required: false
     end
 
-    def daily_mood
-      mood = object.daily_mood
-
-      raise GraphQL::ExecutionError.new('No Mood Selected') unless mood.is_a?(Mood)
-
-      mood
-    end
-
     def weekly_moods
       object.weekly_moods
     end
