@@ -40,7 +40,7 @@ describe 'Fetch User Daily Mood and Habits' do
 
     post '/graphql', params: { query: mood_query }
 
-    expect(json).to have_key(:errors)
+    expect(mood_info).to be nil
   end
 
 
